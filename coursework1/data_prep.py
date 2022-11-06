@@ -17,7 +17,7 @@ def load_data():
     """
     Tourism_arrivals_csv = Path(__file__).parent.parent.joinpath('coursework1', 'data', 'Tourism_arrivals.csv')
     # Load first dataset with arrival data, skips 3 rows as first 3 rows contain logo, irrelevant info and blank row, in a new dataframe
-    df_arrivals = pd.read_csv(Tourism_arrivals_csv, skiprows=3)
+    df_arrivals = pd.read_csv(Tourism_arrivals_csv, skiprows=4)
     
     # Set pandas display options to the number of columns and rows in the dataframe
     pd.set_option('display.max_rows', df_arrivals.shape[0] + 1)
@@ -25,7 +25,21 @@ def load_data():
 
     return df_arrivals
 
-def explore_data_arrivals():
+def basic_visualise_data(data):
+
+    # Print number of columns and rows
+    print("\nShape\n", data.shape) 
+    # Print the first 5 rows
+    print("\nHead - first 5 rows\n", data.head(5))
+    # Print the last 5 rows
+    print("\nTail - last 5 rows\n", data.tail(5))
+    
+    # Print details about the rows and columns, including data types
+    print("Info", data.info(verbose=True)) 
+
+    return data
+
+def explore_data_arrivals(data):
     """
     Explores the Tourism data set for number of arrivals for each country 
     over different years.
@@ -34,33 +48,25 @@ def explore_data_arrivals():
     Returns:
         df_arrivals: a prepared dataframe on the arrivals dataset
     """
-    df_arrivals = load_data()
-    # Print number of columns and rows
-    print("\nShape\n", df_arrivals.shape) 
-    # Print the first 5 rows
-    print("\nHead - first 5 rows\n", df_arrivals.head(5))
-    # Print the last 5 rows
-    print("\nTail - last 5 rows\n", df_arrivals.tail(5))
-
+    df_arrivals = data
+    # Run basic visualiations function defined before
+    basic_visualise_data(df_arrivals)
     # Print unique values in "Indicator Name" and 'Indicator code' columns
     print("\nUnique values - 'Indicator Name' col\n", df_arrivals['Indicator Name'].unique())
     print("\nUnique values - 'Indicator Code' \n", df_arrivals['Indicator Code'].unique())
-
-    # Print details about the rows and columns, including data types
-    print("\nInfo - arrivals\n", df_arrivals.info(verbose=True)) 
     return df_arrivals
+
 
 def drop_columns_arrivals():
     
-    df_arrivals = explore_data_arrivals()
+    df_arrivals = load_data()
     # Drop empty columns (36 year columns and 1 blank)
     df_arrivals.dropna(how='all', axis=1, inplace=True)
     # Drops 'Indicator Code' column as same info as 'Indicator Name' column
     df_arrivals.drop(['Indicator Code'], axis=1, inplace=True)
 
-    
-
     return df_arrivals
+
 
 def load_data_metadata():
 
@@ -78,9 +84,12 @@ def prepare_data_metadata():
 
     df_income_regions = load_data_metadata()
     df_arrivals = drop_columns_arrivals()
-    # Print details about the rows and columns, including data types
-    print("\nInfo - metadata\n", df_income_regions.info(verbose=True)) 
 
+    # Run basic visualiations defined in function
+    basic_visualise_data(df_income_regions)
+
+    ##can be seen that 
+    
     # Drop the 'SpecialNotes' column (unnecessary as just description)
     df_income_regions.drop(['SpecialNotes'], axis=1, inplace=True)
 
@@ -118,8 +127,8 @@ if __name__ == '__main__':
     ''' 
     
     '''
-    load_data()
-    explore_data_arrivals()
+    df_arrivals = load_data()
+    explore_data_arrivals(df_arrivals)
     drop_columns_arrivals()
     load_data_metadata()
     prepare_data_metadata()
