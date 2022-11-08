@@ -24,3 +24,9 @@ Before you submit the coursework:
 
 1. Update this README.md with any additional guidance that may be required to allow your project code to run.
 2. Update requirements.txt with any additional python libraries used in your project.
+
+# **Additional Guidance for my project**
+Set terminal settings to large scrolling to see all output.  
+```
+'File' -> 'Preferences' -> Search for 'Scrollback' -> Change setting 'Terminal > Integrated: Scrollback:' from '1000' to '10000'
+```
