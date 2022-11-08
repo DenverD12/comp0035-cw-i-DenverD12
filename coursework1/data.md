@@ -1,4 +1,4 @@
-aa# **Data preparation and understanding**
+# **Data preparation and understanding**
 
 ## **Import required libraries**
 ```
@@ -26,9 +26,60 @@ def load_data():
 A function was created to load the Tourism_arrivals.csv dataset:
 - The first line of written code in the function opens the file using the pathlib import so any OS user can access the path.  
 - Four rows were skipped because the first row contained a logo and dataset title, the second and fourth row contained a blank row and the third row contained a 'Last Updated' date which was all unneeded for data preparation. 
-- Last 2 written lines before the return statement were to set pandas display options to the number of columns and rows in the dataframe.
+- The last 2 written lines of code before the return statement were to set pandas display options to the number of columns and rows in the dataframe so all analysis can be viewed easily in the terminal.
+<br/>
 <br/>
 
+### **exlpore_data_arrivals() function** ###
+```
+def explore_data_arrivals(data):
+    """
+    Explores the arrivals data set for number of arrivals for each country 
+    over different years.
+
+    Args:
+        data: Pandas dataframe of the Tourism data
+    Returns:
+        df_arrivals: a prepared dataframe on the arrivals dataset
+    """
+    df_arrivals = data
+
+    # Run basic visualiations function defined before
+    basic_visualise_data(df_arrivals)
+
+    # Print unique values in first 4 columns
+    print("\nUnique values - 'Country Name' col\n", df_arrivals['Country Name'].unique())
+    print("\nUnique values - 'Country Code' col\n", df_arrivals['Country Code'].unique())
+    print("\nUnique values - 'Indicator Name' col\n", df_arrivals['Indicator Name'].unique())
+    print("\nUnique values - 'Indicator Code' \n", df_arrivals['Indicator Code'].unique())
+    
+    return df_arrivals
+```
+This function was made to explore the dataset.  
+Breaking down function:
+```
+basic_visualise_data(df_arrivals)
+```
+This runs a helper function called `basic_visualise_data()` which is defined below:
+### **Helper Function: basic_visualise_data()** 
+```
+def basic_visualise_data(data):
+    """
+    Displays shape, first 5 rows, last 5 rows and column details
+    
+    Args:
+        data: any dataset as pandas dataframe
+    Returns: 
+        Prints of shape, head, tail and other column info
+    """
+    print("\nShape\n", data.shape) 
+    print("\nHead - first 5 rows\n", data.head(5))
+    print("\nTail - last 5 rows\n", data.tail(5))
+    
+    print("Info", data.info(verbose=True)) 
+    return data
+```
+Breakdown of helper function:
 ### **Number of rows and columns in Tourism_arrivals.csv**
 ```
 print("\nShape\n", df_arrivals.shape)
@@ -55,12 +106,13 @@ print("Info", data.info(verbose=True))
 ```
 A display of column names, non-null counts and datatype was carried out to understand the dataset more:  
 - The first 4 columns ('Country Name', 'Country Code', 'Indicator Name' and 'Indicator Code') had a Dtype (datatype) of 'object' suggesting they were strings which meant these were worded columns that should be checked for unique values after.
-- The first 4 columns were also non-null which shows there was no missing values in them.
-- The remaining columns seemed to be different years between 1960 and 2021 as well as an empty columns at the end represented by "Unnamed: 66" column name. They all had the datatype "flot 66" which indicated these contained float numbers. These values are the correct datatype to be used in calculations later on.
-- There were many columns with 0 non-nulls which indicate completely empty year columns. This could mean the year data for every country on number of international arrivals was missing. A decision will later be made on what to do with these.
+- The first 4 columns were also non-null since they showed 266 which matched the shape earlier that showed row count of 266. This shows there was no missing values in them.
+- The remaining columns seemed to be different years between 1960 and 2021 as well as an empty columns at the end represented by "Unnamed: 66" column name. They all had the datatype "flot 66" which indicated these contained float numbers. These values were the correct datatype to be used in calculations later on so no conversions were necessary.
+- There were many columns with 0 non-nulls which indicate completely empty year columns. This could mean the year data for every country for number of international arrivals was missing for these years. A decision will later be made on what to do with these.
 <br/>
 <br/>
 
+Now returning to the `explore_data_arrivals(data)` function:
 ## **Initial Unique values check on first 4 rows**
 ### **Unique values in 'Country Name' Column**
 ```
@@ -80,11 +132,11 @@ print("\nUnique values - 'Indicator Code' \n", df_arrivals['Indicator Code'].uni
 ```
 A unique values check was done on the first 4 rows since, from the information on column types earlier it could be seen in the 'Dtype' column that 
 Initial Summary of unique values:
--  "Country Name" column: It appears to contain names of many countries. However, some groupings of countries seem to be present such as 'IDA blend' which, after research, was found to be a group of countries. These all are already individually listed as separate values in the dataset 'Country Name' column. This is unwanted as the focus is for specific countries - this will be addressed and fixed in a later step.
-- 'Indicator Name' and 'Indicator Code' columns: From both the head and tail results before, it was observed that 'Indicator Name' and 'Indicator Column' had the same values respectively throughout each. The unique value check test was done on both columns to verify the previous assumption that the whole column contained the same indicator throughout.  
+-  **'Country Name'** column: It appears to contain names of many countries. However, some groupings of countries seem to be present such as 'IDA blend' which, after research, was found to be a group of countries. These all are already individually listed as separate values in the dataset 'Country Name' column. This is unwanted as the focus is for specific countries - this will be addressed and fixed in a later step.
+- **'Country Code'** column: This appears to contain the country codes of each country.
+- **'Indicator Name'** and **'Indicator Code'** columns: Previously, in the `basic_visualise_data()`[https://github.com/ucl-comp0035/comp0035-cw-i-DenverD12/blob/master/coursework1/data.md#L64] results for both the head and tail display, it was observed that 'Indicator Name' and 'Indicator Column' had the same values respectively throughout each. The unique value check test was done on both columns to verify the previous assumption that the whole column contained the same indicator throughout.  
 The results show one unique value for both with 'International tourism, number of arrivals' and 'ST.INT.ARVL'. This not only proves the assumption, but also confirms there are no whitespaces or inconsistencies in these columns.  
 - Both indicator columns are representing the same information so one column can be safely removed in later steps. Particularly, the 'ST.INT.ARVL' information is quite unclear so will be removed.
-
 <br/>
 <br/>
 
