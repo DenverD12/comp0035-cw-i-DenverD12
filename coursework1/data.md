@@ -139,8 +139,12 @@ def visual_chart_missing_values(data):
     plt.show()
 ```
 The first line of code in this function creates a bar chart which helps to visualise the missing values in columns. THe height was set to 10 so that the column names are more spaced out and easier to view.  
-The chart figure is shown below:
-[Bar Chart showing distribution of missing values in columns](data/Visualisation%20of%20missing%20data%20in%20columns%20of%20the%20dataset%20arrivals.csv.png))
+The chart figure is shown by clicking the link:
+[Bar Chart showing distribution of missing values in columns](data/Visualisation%20of%20missing%20data%20in%20columns%20of%20the%20dataset%20arrivals.csv.png))  
+<br/>
+
+The 
+<br/>
 
 Now returning to the `explore_data_arrivals(data)` function:
 ## **Initial Unique values check on first 4 rows**
