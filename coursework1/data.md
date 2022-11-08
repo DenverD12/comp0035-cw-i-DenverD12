@@ -44,10 +44,9 @@ def explore_data_arrivals(data):
     """
     df_arrivals = data
 
-    # Run basic visualiations function defined before
     basic_visualise_data(df_arrivals)
+    visual_chart_missing_values(df_arrivals)
 
-    # Print unique values in first 4 columns
     print("\nUnique values - 'Country Name' col\n", df_arrivals['Country Name'].unique())
     print("\nUnique values - 'Country Code' col\n", df_arrivals['Country Code'].unique())
     print("\nUnique values - 'Indicator Name' col\n", df_arrivals['Indicator Name'].unique())
@@ -112,6 +111,37 @@ A display of column names, non-null counts and datatype was carried out to under
 <br/>
 <br/>
 
+Returning to the next line in `explore_data_arrivals(data)` function:
+```
+visual_chart_missing_values(df_arrivals)
+```
+This runs a helper function defined below:
+
+### **Seaborn bar chart function for missing data values:**
+```
+def visual_chart_missing_values(data):
+    # Adapted from code written by datavizpyr website
+    # https://datavizpyr.com/visualizing-missing-data-with-seaborn-heatmap-and-displot/
+    """
+    This function plots a bar chart that visualises 
+    the missing values for each column.
+    The orange areas represent missing values 
+    and the 'Count' x axis represents the missing value count
+    
+    Args:
+        data: pandas dataframe of any dataset in this case arrivals.csv
+    Returns:
+        None 
+    """
+    sns.displot(data = df_arrivals.isna().melt(value_name="missing"), y="variable", hue="missing", multiple="fill", height=10,aspect=1.25)
+
+    plt.savefig("Visualisation of missing data in columns of the dataset arrivals.csv.png", dpi=100)
+    plt.show()
+```
+The first line of code in this function creates a bar chart which helps to visualise the missing values in columns. THe height was set to 10 so that the column names are more spaced out and easier to view.  
+The chart figure is shown below:
+[Bar Chart showing distribution of missing values in columns](./coursework1/data/)
+
 Now returning to the `explore_data_arrivals(data)` function:
 ## **Initial Unique values check on first 4 rows**
 ### **Unique values in 'Country Name' Column**
@@ -159,9 +189,8 @@ def drop_year_columns_arrivals():
         dataframe with dropped columns     
     """
     df_arrivals = load_data_arrivals()
-    # Drop empty columns (36 year columns and 1 blank)
+
     df_arrivals.dropna(how='all', axis=1, inplace=True)
-    # Drops 'Indicator Code' column (same info as 'Indicator Name' column)
     df_arrivals.drop(['Indicator Code'], axis=1, inplace=True)
 
     return df_arrivals
@@ -284,10 +313,8 @@ def merge_arrivals_metadata(data1, data2):
     df_arrivals = data1
     df_income_regions = data2
 
-    # Print unique values in 'Country Code' column
     print("\nUnique values - 'Country Code' in metadata.csv\n", df_income_regions['Country Code'].unique())
 
-    # Merge columns where df['Country Code'] match df_income_regions['Country Code']
     df_merged = df_arrivals.merge(df_income_regions, how='right', left_on='Country Code', right_on='Country Code')
     print("\nInfo\n", df_merged.info(verbose=True)) 
 
