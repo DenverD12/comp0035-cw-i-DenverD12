@@ -138,9 +138,8 @@ def visual_chart_missing_values(data):
     sns.displot(data = df_arrivals.isna().melt(value_name="missing"), y="variable", hue="missing", multiple="fill", height=10,aspect=1.25)
 
     plt.savefig("Visualisation of missing data in columns of the dataset arrivals.csv.png", dpi=100)
-    plt.show()
 ```
-The first line of code in this function creates a bar chart which helps to visualise the missing values in columns. THe height was set to 10 so that the column names are more spaced out and easier to view.  
+The first line of code in this function creates a bar chart which helps to visualise the missing values in columns. The height was set to 10 so that the column names are more spaced out and easier to view.  
 The chart figure is shown by clicking the link:
 [Bar Chart showing distribution of missing values in columns](data/Visualisation%20of%20missing%20data%20in%20columns%20of%20the%20dataset%20arrivals.csv.png)
 <br/>

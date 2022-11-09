@@ -68,10 +68,8 @@ def visual_chart_missing_values(data):
                                                y="variable", hue="missing",
                                                multiple="fill", height=10, 
                                                aspect=1)
-    # Saves plot figure
+    # Saves plot figure in 'data' folder in coursework1 repository
     plt.savefig("Visualisation of missing data in columns of the dataset arrivals.csv.png", dpi=100)
-    # Shows plot figure in a new window
-    plt.show()
 
 
 def explore_data_arrivals(data):
