@@ -336,7 +336,7 @@ def empty_rows_check(data):
     in the merged dataframe df_merged
     
     Args:
-        data: the merged panda datafram df_merged 
+        data: the merged panda dataframe df_merged 
     Returns: 
         df_merged: merged pandas dataframe unaltered
     """

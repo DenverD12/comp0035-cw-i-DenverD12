@@ -24,7 +24,7 @@ def load_data():
     return df_arrivals
 ```
 A function was created to load the Tourism_arrivals.csv dataset:
-- The first line of written code in the function opens the file using the pathlib import so any OS user can access the path.  
+- The first line of written code in the function opens the file using the pathlib import, so any OS user can access the path.  
 - Four rows were skipped because the first row contained a logo and dataset title, the second and fourth row contained a blank row and the third row contained a 'Last Updated' date which was all unneeded for data preparation. 
 - The last 2 written lines of code before the return statement were to set pandas display options to the number of columns and rows in the dataframe so all analysis can be viewed easily in the terminal.
 <br/>
@@ -106,9 +106,9 @@ The last 5 rows were displayed to mostly see if the "Indicator Name" and "Indica
 print("Info", data.info(verbose=True)) 
 ```
 A display of column names, non-null counts and datatype was carried out to understand the dataset more:  
-- The first 4 columns ('Country Name', 'Country Code', 'Indicator Name' and 'Indicator Code') had a Dtype (datatype) of 'object' suggesting they were strings which meant these were worded columns that should be checked for unique values after.
-- The first 4 columns were also non-null since they showed 266 which matched the shape earlier that showed row count of 266. This shows there was no missing values in them.
-- The remaining columns seemed to be different years between 1960 and 2021 as well as an empty columns at the end represented by "Unnamed: 66" column name. They all had the datatype "flot 66" which indicated these contained float numbers. These values were the correct datatype to be used in calculations later on so no conversions were necessary.
+- The first 4 columns ('Country Name', 'Country Code', 'Indicator Name' and 'Indicator Code') had a datatype of 'object' suggesting they were strings which meant these were worded columns that should be checked for unique values after.
+- The first 4 columns were also non-null since they showed 266 which matched the shape earlier that showed row count of 266. This shows there were no missing values in them.
+- The remaining columns seemed to be different years between 1960 and 2021 as well as an empty column at the end represented by "Unnamed: 66" column name. They all had the datatype "float 66" which indicated these contained float numbers. These values were the correct datatype to be used in calculations later on, so no conversions were necessary.
 - There were many columns with 0 non-nulls which indicate completely empty year columns. This could mean the year data for every country for number of international arrivals was missing for these years. A decision will later be made on what to do with these.
 <br/>
 <br/>
@@ -146,7 +146,7 @@ The chart figure is shown by clicking the link:
 
 From the barchart, the orange regions represent the missing (null) data and the blue represents the data that is not missing.
 - This helps to further reinforce that the years 1960 to 1994 as well as 2021 have no data available for any countries since they are all orange bars which helps to understand those years do not have any data available and can be safely removed. Again, this could imply year data for every country for number of international arrivals was missing for these years so these columns are not useful.
-- The last unnamed column, 'Unnamed: 66' is also completely orange indicating a unnecessary column which can be removed.
+- The last unnamed column, 'Unnamed: 66' is also completely orange indicating an unnecessary column which can be removed.
 - Some useful information that can be seen which could not be seen previously with the `basic_visualise_data()` function is the trend in missing data for the year columns that aren't completely null. For example, the orange bar size gradually decreases as years progress from 1995 to 2007 indicating more data was made available overall for countries as time went on and missing data decreased.
 - However, around the year 2017, the orange bar size gradually increased till 2020, indicating as time went on, the number of missing data values for arrivals increased.
 - Therefore, this bar chart was a better method to understand the data.
@@ -289,9 +289,9 @@ basic_visualise_data(df_metadata)
 This calls the helper function basic_visualise_data() previously used to visualise the dataset. 
 - From the terminal output it can be seen that in the head and tail that there is long unneccessary description in the 
 **'SpecialNotes'** column so this column can be removed.
-- The **'Country Code'** column also seems to show the values, the country codes, which were also in the the `arrivals.csv` dataset. Therefore, this column was selected to be used later as a common column by which to merge the two datasets.
-- The **'TableName'** column in `metadata.csv` seems to contain country names which is just the same information that was already contained in the first dataset `arrivals.csv` in **'Country Name'** column. Since the country code will be used to merge common columns, as mentioned above, this column is unneccessary. 
-- In the rows and column information, there are 6 columns in total and there is an empty null column is seen at the end of the dataset so this will also be removed.
+- The **'Country Code'** column also seems to show the values, the country codes, which were also in the `arrivals.csv` dataset. Therefore, this column was selected to be used later as a common column by which to merge the two datasets.
+- The **'TableName'** column in `metadata.csv` seems to contain country names which is just the same information that was already contained in the first dataset `arrivals.csv` in **'Country Name'** column. Since the country code will be used to merge common columns, as mentioned above, this column is unnecessary. 
+- In the rows and column information, there are 6 columns in total and there is an empty null column is seen at the end of the dataset, so this will also be removed.
 - After merging, to check if every row value in the **'Country Code'** column matched each dataset, the shape will be checked to see if the number of stays the same before and after merge at 266 rows.
 
 ### **Removal of 'SpecialNotes' and 'TableName' columns**
@@ -389,13 +389,13 @@ The two remaining uncommon columns in the "metadata.csv" dataset called 'Region'
 Region_column = df_merged.pop('Region')
 Income_column = df_merged.pop('IncomeGroup')
 ```
-Each line of code above pops the 'Region' and 'Income' column out of the merged dataframe df_merged, ready to be repositioned.
+Each line of code above pops the 'Region' and 'Income' column out of the merged dataframe `df_merged`, ready to be repositioned.
 ## **Inserting rows into desired position**
 ```
 df_merged.insert(2, Region_column.name, Region_column)
 df_merged.insert(3, Income_column.name, Income_column)
 ```
-- The first line of the code above inserts the 'Region' column in position with index 1, i.e. the second column from the left position..
+- The first line of the code above inserts the 'Region' column in position with index 1, i.e. the second column from the left position.
 - The second line of the code above inserts the 'Region' column in position with index 2, i.e. the third column from the left position.
 ```
 print("\nMerged data - columns reordered check\n", list(df_merged.columns.values)) 
@@ -449,7 +449,7 @@ country_names_worldbank = make_list_country_names()
 The code above calls a helper function make_list_country_names().  
 In this function, a list containing the official country names was simply created by copying and pasting the names from the website list into VSCode, then wrapping each in quotations. Then, by highlighting and using the command Join Lines from the VSCode commands, they were all fit onto lines within the 80-character limit and following PEP8 format. Leading and trailing whitespaces were carefully checked when wrapping in quotations to confirm they weren't present to prevent further inconsistencies.
 - The reasoning behind this is to later see which values in 'Country Name' column match. The ones that don't match will most likely be the groupings and will be displayed later to help make a decision on whether to remove them.
-- This method also ensures perfect format as no whitespaces are present, and, because these were the officially recognised namings on the World Data Bank website, it can be safely assumed there are no special characters or spelling errors present.
+- This method also ensures perfect format as no whitespaces are present, and, because these were the officially recognised names on the World Data Bank website, it can be safely assumed there are no special characters or spelling errors present.
 
 **That helper function `make_list_country_names()` is shown below:**
 ```
@@ -540,8 +540,8 @@ print("\nHead after country group rows drop\n", df_merged.head())
 print("\nShape after country group rows drop\n", df_merged.shape)
 ```
 After the rows were dropped, to check if it worked as expected, the head (the first 5 rows), and the shape were displayed with the above code.
-- The head shows in particular the rows with value 'Africa Eastern and Southern' and 'Africa Western and Central' have been successfuly removed.
-- The shape shows 217 rows which matched the number of offically recognised countries in the World Data Bank (217) so this step was successful and indicates all unwanted rows were removed.
+- The head shows in particular the rows with value 'Africa Eastern and Southern' and 'Africa Western and Central' have been successfully removed.
+- The shape shows 217 rows which matched the number of officially recognised countries in the World Data Bank (217) so this step was successful and indicates all unwanted rows were removed.
 <br/>
 <br/>
 
@@ -552,7 +552,7 @@ def empty_rows_check(data):
     Checks for & displays empty rows and rows with over 50% null values
     in the merged dataframe df_merged
     Args:
-        data: the merged panda datafram df_merged 
+        data: the merged panda dataframe df_merged 
     Returns: 
         df_merged: merged pandas dataframe unaltered
     """
@@ -594,7 +594,7 @@ print("\nRow with null value in 'IncomeGroup'column:\n", df_merged[df_merged["In
 
 The above function prints the row containing the empty value in the `'IncomeGroup'` column.
 - The row displayed was `'Venezuala'`. After doing some research to try and do an imputation of the missing value, it was found that Venezuela is officially unclassified in its income level [5]. 
-- Therefore, for this columm and value, nothing can be done and is left blank. 
+- Therefore, for this column and value, nothing can be done and is left blank. 
 <br/>
 <br/>
 ```
@@ -602,11 +602,11 @@ amount_columns = len(df_merged.axes[1])
 ```
 
 A variable `amount_columns` is defined with the function above which counts of the number of columns.  
-This is for use in in the next steps for printing rows with their percentage of empty values. 
+This is for use in the next steps for printing rows with their percentage of empty values. 
 ```
 print("\nColumns showing initial % of missing values\n", (100 * (df_merged.isnull().sum(axis=1) / amount_columns)))
 ```
-The above code was used to print a percentage of missing (nul) values for each row.  
+The above code was used to print a percentage of missing (null) values for each row.  
 - This was done to an idea of the proportion of the rows that were empty. 
 - Some rows, like rows with index 2, had a large percentage of missing values at around 83% for example. These high percentages will be removed. 
 - Before that, a lower threshold to the allowed maximum percentage is defined in the next step.
@@ -646,7 +646,7 @@ print("\nSome Rows with >50% missing values\n", df_merged.loc[[2, 8, 38, 220]])
 The code above printed some of the full rows with over 50% missing values. Rows with indices 2, 8, 38, 220 were selected just to visualise some of the flagged rows and decide the steps to take.  
 - After doing some research on World Bank Data website, and on the internet, for the missing rows, no data could be found for number of arrivals for these countries. 
 - For example for 'Afghanistan', it can be seen there is no data available on World Bank Data: https://data.worldbank.org/indicator/ST.INT.ARVL?locations=AF. 
-- If later averages and calculations need to be done, countries with more than 50% of missing data will not be useful or accurate to represent countries over the relatively large time scale of years available. 
+- If later averages and calculations need to be done, countries with more than 50% of missing data will not be useful or accurate to represent countries over the relatively large timescale of years available. 
 - Therefore, due to the above reasons, these country rows were decided to be dropped.
 <br/>
 <br/>
@@ -745,8 +745,8 @@ A check was done on the unique values in the 'Region' column to check for any in
 ```
 print("\nUnique values - 'IncomeGroup' column\n", df_merged['IncomeGroup'].unique())
 ```
-The above code checked if there are unique values in the IncomeGroup' column again for inconsistencies:
-- The output printed 4 income groups: ['High income' 'Lower middle income' 'Upper middle income' 'Low income']. 
+The above code checked if there are unique values in the `'IncomeGroup'` column again for inconsistencies:
+- The output printed 4 income groups: `['High income' 'Lower middle income' 'Upper middle income' 'Low income']`. 
 - Again, after doing a search on the World Bank Data website [8], these 4 regions matched exactly, so there are no inconsistencies in this column.
 - It was considered that `'Lower middle income'` and `'Higher middle income'` essentially could be rewritten as just 'Middle income' but it was decided not to combine these two in order to match the official World Bank Data classifications and have more of a split for more accurate results displayed per region later on when the app is to be made.
 
@@ -809,7 +809,9 @@ def check_basic_stats(data):
     return df_merged
 ```
 **Mean:** 
-From the outputs the mean number of arrivals for all countries per year seemed to be increasing each year apart from the year 1997 to 1998 where it dropped from `6.096559e+06` to `5.257463e+06`.
+From the outputs the mean number of arrivals for all countries per year seemed to be increasing each year apart from the year 1997 to 1998 where it dropped from `6.096559e+06` to `5.257463e+06`. The overall increase was expected.  
+**Max:** 
+The maximum value displayed for number of arrivals in each year, over the years fluctuated with a decrease in 1997 to 1998 and stayed at very close values in the years 2000 to 2002. There was big decrease of the maximum value from 2.17877 x 10^8 to 1.171090 x 10^8 between 2019 and 2020 which can be understood that the drop was largely related to the COVID-19 pandemic [9].
 
 <br/>
 <br/>
@@ -832,4 +834,5 @@ prepared_csv_filepath = Path(__file__).parent.parent.joinpath('coursework1', 'da
 [6]: https://data.worldbank.org/country 
 [7]: https://ourworldindata.org/grapher/world-regions-according-to-the-world-bank  
 [8]: https://blogs.worldbank.org/opendata/new-world-bank-country-classifications-income-level-2022-2023#:~:text=The%20World%20Bank%20assigns%20the,the%20previous%20year%20(2021)  
+[9]: https://www.economicsobservatory.com/update-how-is-covid-19-affecting-international-travel-and-tourism  
 ....
