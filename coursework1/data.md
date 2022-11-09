@@ -80,7 +80,7 @@ def basic_visualise_data(data):
     print("Info", data.info(verbose=True)) 
     return data
 ```
-**Breakdown of helper function:**
+**Breakdown of helper function `visualise_data()`:**
 ### **Number of rows and columns in Tourism_arrivals.csv**
 ```
 print("\nShape\n", df_arrivals.shape)
@@ -89,8 +89,8 @@ print("\nShape\n", df_arrivals.shape)
 ```
 print("\nHead - first 5 rows\n", df_arrivals.head(5))
 ```
-From the first 5 rows, it can be seen that Tourism_arrivals.csv gives information about country names and country codes in the first 2 columns.  
-The "Indicator Name" and "Indicator Code" column that represents that the overall data on the rows is for international number of arrivals of people in each country. 
+From the first 5 rows, it can be seen that the dataset, Tourism_arrivals.csv gives information about country names and country codes in the first 2 columns.  
+The "Indicator Name" and "Indicator Code" column seem to represent that the overall data on the rows is for international number of arrivals of people in each country. 
 The proceeding columns after seem to all be years and contain info on the number of arrivals for each country.  
 <br/>
 
@@ -98,7 +98,7 @@ The proceeding columns after seem to all be years and contain info on the number
 ```
 print("\nTail - last 5 rows\n", df_arrivals.tail(5))
 ```
-The last 5 rows were displayed to mostly see if the "Indicator Name" and "Indicator Code" contained the exact same values per column respectively and this held true so it could be possible to assume both whole columns may contain the same indicators throughout (per column).  
+The last 5 rows were displayed to mostly see if the "Indicator Name" and "Indicator Code" contained the exact same values per column respectively. From the output, this held true as both values could be seen repeated in the tail so it could be possible to assume both whole columns may contain the same indicators throughout (per column). This can later be confirmed with a unique values check for each column.  
 <br/>
 
 ### **Information on Rows and columns: column name, non-null count and dataypes**
@@ -107,8 +107,8 @@ print("Info", data.info(verbose=True))
 ```
 A display of column names, non-null counts and datatype was carried out to understand the dataset more:  
 - The first 4 columns ('Country Name', 'Country Code', 'Indicator Name' and 'Indicator Code') had a datatype of 'object' suggesting they were strings which meant these were worded columns that should be checked for unique values after.
-- The first 4 columns were also non-null since they showed 266 which matched the shape earlier that showed row count of 266. This shows there were no missing values in them.
-- The remaining columns seemed to be different years between 1960 and 2021 as well as an empty column at the end represented by "Unnamed: 66" column name. They all had the datatype "float 66" which indicated these contained float numbers. These values were the correct datatype to be used in calculations later on, so no conversions were necessary.
+- The first 4 columns were also non-null since they showed `'266'` which matched the shape earlier that showed row count of `'266'`. This shows there were no missing values in them.
+- The remaining columns seemed to be different years between 1960 and 2021 as well as an empty column at the end represented by `"Unnamed: 66"` column name. They all had the datatype `"float 66"` which indicated these contained float numbers. These values were the correct datatype to be used for calculations later on, such as basic statistics to understand the data, so no conversions of datatype were necessary.
 - There were many columns with 0 non-nulls which indicate completely empty year columns. This could mean the year data for every country for number of international arrivals was missing for these years. A decision will later be made on what to do with these.
 <br/>
 <br/>
@@ -119,7 +119,7 @@ visual_chart_missing_values(df_arrivals)
 ```
 This runs a helper function defined below:
 
-### **Seaborn bar chart function for missing data values:**
+### **Seaborn bar chart function for missing data values:** [1]
 ```
 def visual_chart_missing_values(data):
     # Adapted from code written by datavizpyr website
@@ -172,18 +172,19 @@ print("\nUnique values - 'Indicator Name' col\n", df_arrivals['Indicator Name'].
 ```
 print("\nUnique values - 'Indicator Code' \n", df_arrivals['Indicator Code'].unique())
 ```
-A unique values check was done on the first 4 rows since, from the information on column types earlier it could be seen in the 'Dtype' column that 
+A unique values check was done on the first 4 rows since, from the information on column types earlier it could be seen in the `'Dtype'` output column that these columns were `'object'` datatype so not numbers but strings. So unique values check can be done to better understand these columns.  
+
 Initial Summary of unique values:
--  **'Country Name'** column: It appears to contain names of many countries. However, some groupings of countries seem to be present such as 'IDA blend' which, after research, was found to be a group of countries. This is unwanted as the main focus is for specific countries, then regions but most of these groups like 'IDA blend' are not countries or regions - this will be addressed and fixed in a later step.
+-  **'Country Name'** column: It appears to contain names of many countries. However, some groupings of countries seem to be present such as 'IDA blend' which, after research, was found to be a group of countries. This is unwanted as the main focus is for specific countries, then regions but most of these groups like 'IDA blend' are not countries or regions. This will be addressed and fixed in a later step.
 - **'Country Code'** column: This appears to contain the country codes of each country.
 - **'Indicator Name'** and **'Indicator Code'** columns: Previously, in the `basic_visualise_data()` function results for both the head and tail display, it was observed that 'Indicator Name' and 'Indicator Column' had the same values respectively throughout each. The unique value check test was done on both columns to verify the previous assumption that the whole column contained the same indicator throughout.  
 The results show one unique value for both with 'International tourism, number of arrivals' and 'ST.INT.ARVL'. This not only proves the assumption, but also confirms there are no whitespaces or inconsistencies in these columns.  
-- Both indicator columns are representing the same information so one column can be safely removed in later steps. Particularly, the 'ST.INT.ARVL' information is quite unclear so will be removed.
+- Both indicator columns are representing the same information so one column can be safely removed in later steps. Particularly, the 'ST.INT.ARVL' information is quite unclear with abbreviations so will be removed.
 <br/>
 <br/>
 
 ## **Drop columns in Tourism_arrivals.csv**
-It was observed previously from the column details that columns (with index) 4 to 38 for years 1960 to 1994, as well as column 65 for year 2021 and 66 the unnamed end column, all contained completely empty values which was further seen on the bar chart. These were all year columns, except for the last column which was a completely blank column with no heading. This implied that there was no data on number of arrivals for those years at all. After doing some research, it could be concluded there was no data available for these years 1960 to 1994.  
+It was observed previously from the column details that columns (with index) 4 to 38 for years 1960 to 1994, as well as column 65 for year 2021 and 66 (the unnamed end column), all contained completely empty values which was further seen on the bar chart. These were all year columns, except for the last column which was a completely blank column with no heading. This implied that there was no data on number of arrivals for those years at all. After doing some research, it could be concluded there was no data available for these years 1960 to 1994.  
 Therefore, it is safe to make the decision to drop all these columns.  
 For the year 2021, there was data available on the internet. However, for the purpose of this coursework, where ethical checks would need to be carried out to use this external data, it was decided to drop this column as well and just focus on the years provided.  
 <br/>
@@ -213,14 +214,14 @@ def drop_year_columns_arrivals():
 ```
 df_arrivals = df_arrivals.dropna(how='all', axis=1)
 ```
-From the info displayed before, and the reasoning explained in the previous explanation, the 35 empty year columns and the fully empty(null) column was dropped with the above function. The axis set to equal 1 to focus on columns.
+From the info displayed before, and the reasoning explained in the previous explanation, the 35 empty year columns and the completely empty(null) column was dropped with the above function. The axis is set to equal 1 to focus on columns.
 <br/>
 
 ### **Drop Indicator code column**
 ```
 df_arrivals = df_arrivals.drop(['Indicator Code'], axis=1)
 ```
-By analysing the previous unique values information about columns, it was seen that the "Indicator Code" and "Indicator Name" columns displayed information which both indicated data is about international tourist arrivals. Since the "Indicator Code" column displayed "ST.INT.ARVL" has many abbreviations that could be hard to understand, it was decided to only keep the "Indicator Name Column".
+By analysing the previous unique values information about columns, it was seen that the "Indicator Code" and "Indicator Name" columns displayed information which both indicated the data is about international tourist arrivals. Since the "Indicator Code" column displayed "ST.INT.ARVL" has many abbreviations that could be hard to understand, it was decided to only keep the "Indicator Name Column".
 <br/>  
 Further exploration of this current dataset is done is continued in a later stage. Instead, the dataset with country metadata is explored and prepared in order to merge it first with the main dataset arrivals.csv to make cleaning easier.
 <br/> 
