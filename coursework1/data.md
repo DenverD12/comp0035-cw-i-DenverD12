@@ -813,6 +813,7 @@ def check_basic_stats(data):
 From the outputs the mean number of arrivals for all countries per year seemed to be increasing each year apart from the year 1997 to 1998 where it dropped from `6.096559e+06` to `5.257463e+06`. The overall increase was expected.  
 **Max:** 
 The maximum value displayed for number of arrivals in each year, over the years fluctuated with a decrease in 1997 to 1998 and stayed at very close values in the years 2000 to 2002. There was big decrease of the maximum value from 2.17877 x 10^8 to 1.171090 x 10^8 between 2019 and 2020 which can be understood that the drop was largely related to the COVID-19 pandemic [9].
+- All values were pretty close to each other for the max and minimums and a steady increase so this could suggest no anomalies were present.
 
 <br/>
 <br/>
