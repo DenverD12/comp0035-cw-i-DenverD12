@@ -39,4 +39,4 @@ jobs:
         ps aux
     - name: Test with pytest and cov
       run: |
-        python -m pytest --cov-report term-missing --cov=coursework2  coursework2\test
+        python -m pytest --cov-report term-missing --cov=coursework2  coursework2\test 
