@@ -24,4 +24,12 @@ def test_reset(basket, example_item_toastie):
     # Assert the basket dictionary should now be empty
     assert basket.items == {}
 
-
+@pytest.mark.parametrize(
+    "example_item_name, quantity",
+    [
+     ("example_item_toastie", 1),  # Try adding 1 item, quantity of 1
+     ("example_item_toastie", 2),  # Try adding same item, but quantity of 2
+     ("example_item_butter", 1)  # Try adding different item, quantity of 1
+    ])
+    # Uses the fixtures (created in conftest) passed as a string as parameters
+    # Uses the item quantity a parameter
