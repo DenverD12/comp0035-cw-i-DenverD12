@@ -113,3 +113,29 @@ def test_when_add_item_then_quantity_increases(
     # Uses a fixture (created in conftest) passed as a string as a parameter
     # Also uses a specified item quantity and expected result as parameters
     # Expected result is an error message that should be thrown if ValueError
+def test_add_item_basket_error(
+            basket, example_item_name, quantity, expected_result, request):
+    """
+    Tests if the ValueError expected custom message is thrown when an added
+    item quantity is not greater than 0 is added using the add_item() function
+
+    Args:
+        basket: fixture of the shopping Basket dictionary
+        example_item_name: parameter containing fixtures of 2 example items
+        quantity: parameter containing quantity of each example item
+        expected_result: parameter containing expected error message
+        request: built in pytest fixture to obtain the value of the fixtures
+
+    Given: An item (created as a fixtures in conftest.py)
+    When: The item is added to basket using add.item() with a quantity < or = 0
+    Then: ValueError should be raised and caught, throwing a custom message:
+    "Invalid operation - Quantity must be a positive number!"
+    """
+    # Reset basket for each test case and obtain value of fixture
+    basket.reset()
+    example_item_name = request.getfixturevalue(example_item_name)
+    # Add item to basket for each quantity case
+    basket.add_item(example_item_name, quantity)
+    # Check ValueError is thrown by asserting the correct custom error message
+    assert expected_result
+
