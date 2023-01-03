@@ -72,3 +72,30 @@ def test_when_add_item_then_basket_contains_item(
     ])
     # Uses the fixtures (created in conftest) passed as a string as parameters
     # Also uses specified item quantity and expected result as parameters
+def test_when_add_item_then_quantity_increases(
+            basket, example_item_name, quantity, expected_result, request):
+    """
+    Tests if the add_item() function adds the item successfully to the basket
+    in terms of the quantity of item by checking if the quantity (value) of
+    the key in the basket dictionary is correct
+
+    Args:
+        basket: fixture of the shopping Basket dictionary
+        example_item_name: parameter containing fixtures of 2 example items
+        quantity: parameter containing quantity of each example item
+        expected_result: parameter containing expected result of the item key
+        request: built in pytest fixture to obtain the value of the fixtures
+
+
+    Given: An item/items (created as a fixtures in conftest.py)
+    When: The item/s are added to the basket using add.item()
+    Then: The item/s should be in the basket (dictionary)
+
+    """
+    # Reset basket for each test case and obtain value of fixture
+    basket.reset()
+    example_item_name = request.getfixturevalue(example_item_name)
+    # Add item to basket for each parameterized case
+    basket.add_item(example_item_name, quantity)
+    # Assert if key value for added item/s is the correct expected quantity
+    assert basket.items[example_item_name] == expected_result
