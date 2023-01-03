@@ -37,6 +37,6 @@ jobs:
     - name: check if package update services running
       run: |
         ps aux
-    - name: Test with pytest and cov
+    - name: Test with pytest
       run: |
-        python -m pytest --cov-report term-missing --cov=coursework2  coursework2\test\ 
+        python -m pytest
