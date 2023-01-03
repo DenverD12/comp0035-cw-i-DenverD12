@@ -1,18 +1,15 @@
 import decimal
 import pytest
-from decimal import Decimal
-from test.shopping_basket import Basket
-from test.shopping_basket import Item
 
 
 def test_reset(basket, example_item_toastie):
     """
     Tests if reset() function resets basket contents to give empty dictionary
-    
+
     Fixtures used (created in conftest.py):
         basket: fixture of the shopping Basket dictionary
         example_item_toastie: fixture of an example item
-    
+
     Given: An item (created as a fixture) is in the basket (created as fixture)
     When: The reset() function is called to reset the basket contents
     Then: There should be no items in the basket
@@ -24,6 +21,7 @@ def test_reset(basket, example_item_toastie):
     # Assert the basket dictionary should now be empty
     assert basket.items == {}
 
+
 @pytest.mark.parametrize(
     "example_item_name, quantity",
     [
@@ -31,8 +29,8 @@ def test_reset(basket, example_item_toastie):
      ("example_item_toastie", 2),  # Try adding same item, but quantity of 2
      ("example_item_butter", 1)  # Try adding different item, quantity of 1
     ])
-    # Uses the fixtures (created in conftest) passed as a string as parameters
-    # Uses the item quantity a parameter
+# Uses the fixtures (created in conftest) passed as a string as parameters
+# Uses the item quantity a parameter
 def test_when_add_item_then_basket_contains_item(
         basket, example_item_name, quantity, request):
     """
@@ -70,8 +68,8 @@ def test_when_add_item_then_basket_contains_item(
      ("example_item_toastie", 2, 2),  # Try adding same item, but quantity of 2
      ("example_item_butter", 1, 1)  # Try adding different item, quantity of 1
     ])
-    # Uses the fixtures (created in conftest) passed as a string as parameters
-    # Also uses specified item quantity and expected result as parameters
+# Uses the fixtures (created in conftest) passed as a string as parameters
+# Also uses specified item quantity and expected result as parameters
 def test_when_add_item_then_quantity_increases(
             basket, example_item_name, quantity, expected_result, request):
     """
@@ -109,10 +107,10 @@ def test_when_add_item_then_quantity_increases(
      ("example_item_toastie", 0,
       "Invalid operation - Quantity must be a positive number!"),
     ])
-    # First test case if quantity < 0, second if quantity = 0
-    # Uses a fixture (created in conftest) passed as a string as a parameter
-    # Also uses a specified item quantity and expected result as parameters
-    # Expected result is an error message that should be thrown if ValueError
+# First test case if quantity < 0, second if quantity = 0
+# Uses a fixture (created in conftest) passed as a string as a parameter
+# Also uses a specified item quantity and expected result as parameters
+# Expected result is an error message that should be thrown if ValueError
 def test_add_item_basket_error(
             basket, example_item_name, quantity, expected_result, request):
     """
@@ -174,4 +172,3 @@ def test_get_total_cost(basket, example_item_toastie, example_item_butter):
 
     # Asserting if function cost result matches the calculated total
     assert basket.get_total_cost() == expected_total_cost
-
