@@ -99,3 +99,17 @@ def test_when_add_item_then_quantity_increases(
     basket.add_item(example_item_name, quantity)
     # Assert if key value for added item/s is the correct expected quantity
     assert basket.items[example_item_name] == expected_result
+
+
+@pytest.mark.parametrize(
+    "example_item_name, quantity, expected_result",
+    [
+     ("example_item_toastie", -1,
+      "Invalid operation - Quantity must be a positive number!"),
+     ("example_item_toastie", 0,
+      "Invalid operation - Quantity must be a positive number!"),
+    ])
+    # First test case if quantity < 0, second if quantity = 0
+    # Uses a fixture (created in conftest) passed as a string as a parameter
+    # Also uses a specified item quantity and expected result as parameters
+    # Expected result is an error message that should be thrown if ValueError
