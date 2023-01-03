@@ -62,3 +62,13 @@ def test_when_add_item_then_basket_contains_item(
     # Assert if the item for each case is in the basket dictionary
     assert example_item_name in basket.items
 
+
+@pytest.mark.parametrize(
+    "example_item_name, quantity, expected_result",
+    [
+     ("example_item_toastie", 1, 1),  # Try adding 1 item, quantity of 1
+     ("example_item_toastie", 2, 2),  # Try adding same item, but quantity of 2
+     ("example_item_butter", 1, 1)  # Try adding different item, quantity of 1
+    ])
+    # Uses the fixtures (created in conftest) passed as a string as parameters
+    # Also uses specified item quantity and expected result as parameters
