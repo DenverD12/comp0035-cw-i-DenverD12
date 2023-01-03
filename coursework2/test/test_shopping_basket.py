@@ -139,3 +139,39 @@ def test_add_item_basket_error(
     # Check ValueError is thrown by asserting the correct custom error message
     assert expected_result
 
+
+def test_get_total_cost(basket, example_item_toastie, example_item_butter):
+    """
+    Tests if the get_total_cost() function calculates the correct total
+    cost of items in the basket
+
+    Args:
+        basket: fixture of the shopping Basket dictionary
+        example_item_toastie: fixture of an example item created in conftest.py
+        example_item_butter: fixture of different item created in contest.py
+
+    Given: Two items (created as fixtures in conftest.py) are added to basket
+    When: When the the get_total_cost() function is called
+    Then: The result (total cost of items in basket) should equal the
+            calculated correct expected cost
+    """
+
+    # For an empty basket case, total cost should be 0
+    basket.reset()
+    assert basket.get_total_cost() == 0
+
+    # For case of adding 2 lots of two different items to basket
+    basket.add_item(example_item_toastie, quantity=2)
+    basket.add_item(example_item_butter, quantity=2)
+    # Defining variables for price and quantity of each item in the fixtures
+    price_item_toastie = decimal.Decimal('1.52')
+    quantity_item_toastie = 2
+    price_item_butter = decimal.Decimal('0.89')
+    quantity_item_butter = 2
+    # Calculation for correct expected total cost of items in basket
+    expected_total_cost = (price_item_toastie*quantity_item_toastie
+                           + price_item_butter*quantity_item_butter)
+
+    # Asserting if function cost result matches the calculated total
+    assert basket.get_total_cost() == expected_total_cost
+
