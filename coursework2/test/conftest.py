@@ -1,7 +1,7 @@
 import decimal
 import pytest
-from test.shopping_basket import Basket
-from test.shopping_basket import Item
+from coursework2.test.shopping_basket import Basket
+from coursework2.test.shopping_basket import Item
 
 
 @pytest.fixture(scope='session')
