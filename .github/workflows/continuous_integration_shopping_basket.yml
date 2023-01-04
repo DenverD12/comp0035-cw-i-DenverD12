@@ -27,17 +27,17 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-      # Tester pytest, linter flake8, and pytest-cov for coverage are installed 
-        pip install flake8 pytest pep8-naming pytest pytest-cov 
+        pip install flake8 pytest pep8-naming pytest pytest-cov
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      # Run linting with flake8
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      # Run unit tests with pytest
+    - name: check if package update services running
+      run: |
+        ps aux
     - name: Test with pytest
       run: |
         python -m pytest
