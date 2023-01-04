@@ -19,3 +19,7 @@ ucl-comp0035/comp0035-cw-i-DenverD12/coursework2/continuous_integration_evidence
 
 ## Linting also used as well as unit tests, evidence below:
 ### flake8 was the chosen linter
+https://github.com/ucl-comp0035/comp0035-cw-i-DenverD12/blob/master/coursework2/continuous_integration_linting_evidence.png 
+
+If link doesn't work locate the screenshot in file path:  
+ucl-comp0035/comp0035-cw-i-DenverD12/coursework2/continuous_integration_linting_evidence.png
