@@ -432,3 +432,25 @@ This is assigned to a variable `expected_total_cost`.
 assert basket.get_total_cost() == expected_total_cost
 ```
 This asserts that the function being tested should return the correct value that matches the expected_total_cost, given the function being tested `get_total_cost()` works correctly.
+
+## **Evidence for all tests working:"
+### For terminal output of all 10 tests:
+Link to evidence image: https://github.com/ucl-comp0035/comp0035-cw-i-DenverD12/blob/master/coursework2/testing_success_evidence_terminal_output.png 
+<br/>
+
+If link doesn't work locate the screenshot in file path:  
+`ucl-comp0035/comp0035-cw-i-DenverD12/coursework2/testing_success_evidence_terminal_output.png`
+<br/>
+<br/>
+
+### For filepaths and all test names showing success in the Testing section:
+Link to evidence image: https://github.com/ucl-comp0035/comp0035-cw-i-DenverD12/blob/master/coursework2/testing_success_evidence_with_filepaths.png
+<br/>
+
+If link doesn't work locate the screenshot in file path:  
+`ucl-comp0035/comp0035-cw-i-DenverD12/coursework2/testing_success_evidence_with_filepaths.png`
+<br/>
+<br/>
+
+### For continuous integration containing linting and unit testing evidence:
+**See `tools-techniques-2.md` file**
