@@ -50,7 +50,7 @@ def test_when_add_item_then_basket_contains_item(
 
     """
     # Reset basket for each test iteration
-    basket.reset()
+    basket.items.clear()
     # Obtain value of each of the fixtures such as brand_name, price
     example_item_name = request.getfixturevalue(example_item_name)
 
@@ -68,7 +68,7 @@ def test_when_add_item_then_basket_contains_item(
      ("example_item_toastie", 2, 2),  # Try adding same item, but quantity of 2
      ("example_item_butter", 1, 1)  # Try adding different item, quantity of 1
     ])
-# Uses the fixtures (created in conftest) passed as a string as parameters
+# Uses the fixtures (created in conftest.py) passed as a string as parameters
 # Also uses specified item quantity and expected result as parameters
 def test_when_add_item_then_quantity_increases(
             basket, example_item_name, quantity, expected_result, request):
@@ -91,7 +91,7 @@ def test_when_add_item_then_quantity_increases(
 
     """
     # Reset basket for each test case and obtain value of fixture
-    basket.reset()
+    basket.items.clear()
     example_item_name = request.getfixturevalue(example_item_name)
     # Add item to basket for each parameterized case
     basket.add_item(example_item_name, quantity)
@@ -111,7 +111,7 @@ def test_when_add_item_then_quantity_increases(
 # Uses a fixture (created in conftest) passed as a string as a parameter
 # Also uses a specified item quantity and expected result as parameters
 # Expected result is an error message that should be thrown if ValueError
-def test_add_item_basket_error(
+def test_add_item_not_greater_than_zero(
             basket, example_item_name, quantity, expected_result, request):
     """
     Tests if the ValueError expected custom message is thrown when an added
@@ -130,7 +130,7 @@ def test_add_item_basket_error(
     "Invalid operation - Quantity must be a positive number!"
     """
     # Reset basket for each test case and obtain value of fixture
-    basket.reset()
+    basket.items.clear()
     example_item_name = request.getfixturevalue(example_item_name)
     # Add item to basket for each quantity case
     basket.add_item(example_item_name, quantity)
@@ -155,7 +155,7 @@ def test_get_total_cost(basket, example_item_toastie, example_item_butter):
     """
 
     # For an empty basket case, total cost should be 0
-    basket.reset()
+    basket.items.clear()
     assert basket.get_total_cost() == 0
 
     # For case of adding 2 lots of two different items to basket

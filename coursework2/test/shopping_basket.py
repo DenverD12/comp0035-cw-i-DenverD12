@@ -80,7 +80,6 @@ class Basket:
                 raise ValueError
         except ValueError:
             print("Invalid operation - Quantity must be a positive number!")
-             
 
     def remove_item(self, item, quantity=0):
         """ Remove an item from the shopping basket (or reduces its quantity if there is more than one)
@@ -167,7 +166,6 @@ class Basket:
                 bool : Boolean value, True if empty other False
         """
         return len(self.items) == 0
-
 
 
 if __name__ == '__main__':
